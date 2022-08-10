@@ -27,18 +27,21 @@ type Quote {
 
 
 type Mutation {
-    signupUser(userNew:UserInput!):User
-    signInUser(userSignIn:UserSignInInput!):LoginReturn
+    signupUser(userData:UserSignUpInput!):User
+    signInUser(userData:UserSignInInput!):LoginReturn
+    createQuote(name:String):String
 }
 
 
 
-input UserInput {
+input UserSignUpInput {
     firstName: String!
     lastName: String!
     email: String!
     password: String!
 }
+
+
 
 type LoginReturn {
     token:String

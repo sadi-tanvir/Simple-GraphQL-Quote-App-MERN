@@ -1,6 +1,7 @@
 import { quotes, users } from "./fakedb.js"
 import { randomBytes } from "crypto"
 import User from "./models/User.js"
+import Quote from "./models/Quote.js"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 
@@ -26,8 +27,8 @@ export default {
     },
     Mutation: {
         // user signup
-        signupUser: async (_, { userNew }) => {
-            const { firstName, lastName, email, password } = userNew
+        signupUser: async (_, { userData }) => {
+            const { firstName, lastName, email, password } = userData
 
             // checking user existence
             const isUserExist = await User.findOne({ email })
@@ -49,8 +50,8 @@ export default {
         },
 
         // user signin
-        signInUser: async (_, { userSignIn }) => {
-            const { email, password } = userSignIn;
+        signInUser: async (_, { userData }) => {
+            const { email, password } = userData;
 
             // find user from database
             const user = await User.findOne({ email })
@@ -60,15 +61,30 @@ export default {
             const isMatchPassword = bcrypt.compareSync(password, user.password)
             if (!isMatchPassword) throw new Error("Invalid Credentials.")
 
-            const token = jwt.sign({ email:user.email }, process.env.SECRET_KEY)
+            const token = jwt.sign({ email: user.email }, process.env.SECRET_KEY)
 
             return {
                 message: 'User Login Successfully.',
                 token,
                 user
             }
-            
+        },
 
+        // Create Quote
+        createQuote: async (_, { name }, context) => {
+            if (!context.email) {
+                throw new Error("Unauthorized User.")
+            }
+
+            // find user from database
+            const user = await User.findOne({ email: context.email })
+
+            Quote.create({
+                name,
+                by: user._id
+            })
+
+            return "Quote Created Successfully."
         }
     }
 }
