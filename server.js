@@ -6,20 +6,20 @@ import resolvers from "./resolvers.js"
 import typeDefs from "./schemaGql.js"
 import jwt from "jsonwebtoken"
 
+// middleware
+const context = ({ req }) => {
+    const { authorization } = req.headers
+    if (authorization) {
+        const { email } = jwt.verify(authorization, process.env.SECRET_KEY)
+        return { email }
+    }
+}
 
 // apollo server
 const server = new ApolloServer({
     typeDefs,
     resolvers,
-    context: ({ req }) => {
-        console.log(req.headers)
-        
-        const { authorization } = req.headers
-        if (authorization) {
-            const { email } = jwt.verify(authorization, process.env.SECRET_KEY)
-            return { email }
-        }
-    },
+    context,
     plugins: [
         ApolloServerPluginLandingPageGraphQLPlayground()
     ]

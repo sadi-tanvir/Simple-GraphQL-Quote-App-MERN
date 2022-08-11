@@ -11,19 +11,15 @@ export default {
             const users = await User.find({})
             return users
         },
-        user: (parent, args) => users.find(user => user._id === args._id),
-        quotes: () => quotes,
-        quote: (parent, args) => quotes.filter(quote => quote.by === args.by)
+        user: async (parent, args, context) => await User.findOne({ email: context.email }),
+        quotes: async () => await Quote.find({}),
+        quote: async (parent, args) => await Quote.find({ by: args.by })
     },
     User: {
-        quotes: (user) => quotes.filter(quote => {
-            return quote.by === user._id
-        })
+        quotes: async (user) => await Quote.find({ by: user._id })
     },
     Quote: {
-        author: (q) => users.find(ur => {
-            return ur._id === q.by
-        })
+        author: async (q) => await User.findOne({ by: q.by })
     },
     Mutation: {
         // user signup
