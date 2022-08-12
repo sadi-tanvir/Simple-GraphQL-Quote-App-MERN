@@ -1,17 +1,43 @@
-import { Routes, Route } from "react-router-dom"
-import Home from "./components/Home/Home";
-import Login from "./components/login-user/Login/Login";
-import Register from "./components/login-user/Register/Register";
+import { useEffect } from "react"
+import { useRoutes } from "react-router-dom"
 import Navbar from "./components/Navbar/Navbar"
+import { routes } from "./routes"
+
+
 function App() {
+  const element = useRoutes(routes)
+
+  // useEffect(() => {
+  //   fetch('http://localhost:4000/', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify({
+  //       query: `
+  //       query getQuotesById($by:ID!){
+  //         quote(by:$by){
+  //           name
+  //           by
+  //         }
+  //       }
+  //       `,
+  //       variables:{
+  //         by:"62f3530c06c587eef5f050e9"
+  //       }
+  //     })
+  //   })
+  //     .then(res => res.json())
+  //     .then(data => console.log(data))
+  // }, [])
+
+
   return (
     <>
       <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-      </Routes>
+
+      {/* routes */}
+      {element}
     </>
   );
 }

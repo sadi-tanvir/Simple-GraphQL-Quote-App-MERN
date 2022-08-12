@@ -15,6 +15,9 @@ const Navbar = () => {
                     <Link to="/">
                         <p className="mr-3">Home</p>
                     </Link>
+                    <Link to="/quotes">
+                        <p className="mr-3">Quotes</p>
+                    </Link>
                     <Link to="/register">
                         <p className="mr-3">Register</p>
                     </Link>
@@ -45,12 +48,14 @@ const Navbar = () => {
                             </div>
                         </label>
                         <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                            <li>
-                                <a class="justify-between">
-                                    Profile
-                                    <span class="badge">New</span>
-                                </a>
-                            </li>
+                            <Link to="/profile">
+                                <li>
+                                    <a class="justify-between">
+                                        Profile
+                                        <span class="badge">New</span>
+                                    </a>
+                                </li>
+                            </Link>
                             <li><a>Settings</a></li>
                             <li><a>Logout</a></li>
                         </ul>
