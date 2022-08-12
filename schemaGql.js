@@ -5,7 +5,7 @@ export default gql`
 type Query {
     users: [User]
     user(_id:ID!): User
-    quotes: [Quote]
+    quotes: [QuoteWithInfo]
     quote(by:ID!): [Quote]
 }
 
@@ -16,6 +16,17 @@ type User {
     email: String!
     password: String
     quotes: [Quote]
+}
+
+type QuoteWithInfo{
+    name: String
+    by: AuthorInfo
+}
+
+type AuthorInfo {
+    _id: ID
+    firstName: String
+    lastName: String
 }
 
 type Quote {
