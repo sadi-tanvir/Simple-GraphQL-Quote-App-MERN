@@ -1,5 +1,7 @@
+import { useMutation } from '@apollo/client';
 import React, { useState } from 'react';
 import { Link } from "react-router-dom"
+import { SIGNUP_USER } from '../../../Gql-Operations/mutations';
 
 const Register = () => {
     const [info, setInfo] = useState({
@@ -8,24 +10,41 @@ const Register = () => {
         email: "",
         password: ""
     })
+
+    const [signupMutation, { data, loading, error }] = useMutation(SIGNUP_USER)
+
+    console.log('loading', loading)
+    console.log('error', error?.message)
+    console.log('data', data)
+
     const handleChange = (e) => {
         const { value, name } = e.target;
         setInfo({ ...info, [name]: value })
     }
 
-    const handleSubmit = (e) => {
+    // singnup user
+    const handleSubmit = async (e) => {
+        const { firstName, lastName, email, password } = info;
         e.preventDefault()
-        try {
-            console.log(info.email, info.password, info.firstName, info.lastName)
-        } catch (error) {
-            console.log(error);
-        }
+        await signupMutation({
+            variables: {
+                userData: {
+                    firstName,
+                    lastName,
+                    email,
+                    password
+                }
+            }
+        })
     }
     return (
         <>
             <div className="hero min-h-screen bg-base-200">
                 <div className="hero-content flex-col lg:flex-row-reverse">
                     <div className="text-center lg:text-left">
+                        {error && <p className='text-red-500 text-2xl font-bold'>{error?.message}</p>}
+                        {data && <p className='text-green-500 text-2xl font-bold'>{data?.user?.firstName} has signed up!</p>}
+
                         <h1 className="text-5xl font-bold">Register now!</h1>
                         <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
                     </div>
@@ -34,7 +53,7 @@ const Register = () => {
                             <form onSubmit={handleSubmit}>
                                 <div className="form-control">
                                     <label className="label">
-                                        <span className="label-text">Email</span>
+                                        <span className="label-text">First Name</span>
                                     </label>
                                     <input
                                         onChange={handleChange}
@@ -46,7 +65,7 @@ const Register = () => {
                                 </div>
                                 <div className="form-control">
                                     <label className="label">
-                                        <span className="label-text">Email</span>
+                                        <span className="label-text">Last Name</span>
                                     </label>
                                     <input
                                         onChange={handleChange}

@@ -12,7 +12,11 @@ const Quotes = () => {
     }
 
     if (loading) {
-        return <p>loading</p>
+        return (
+            <div className="container mx-auto mt-5">
+                <h1 className="text-4xl bg-purple-300 px-5 py-1 text-green-800 capitalize font-bold mb-10">Loading...</h1>
+            </div>
+        )
     } else {
         return (
             <>
