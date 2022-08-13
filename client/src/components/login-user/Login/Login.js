@@ -2,6 +2,7 @@ import { useMutation } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { SIGNIN_USER } from '../../../Gql-Operations/mutations';
+import { GET_ALL_QUOTES, GET_USER_INFORMATION } from '../../../Gql-Operations/queries';
 
 const Login = () => {
     // state
@@ -15,7 +16,7 @@ const Login = () => {
         onCompleted(data) {
             localStorage.setItem("accessToken", data?.user.token)
             navigate('/')
-        }
+        },
     })
 
     // router

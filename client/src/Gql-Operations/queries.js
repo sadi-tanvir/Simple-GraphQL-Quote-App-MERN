@@ -5,25 +5,24 @@ query getAllQuotes{
     quotes{
       name
       by{
-        _id
         firstName
-        lastName
       }
     }
   }
 `
 
 
-export const GET_USER_INFO = gql`
-query userInfo{
+export const GET_USER_INFORMATION = gql`
+query findUser{
   user(_id:""){
-    _id
+    email
     firstName
     lastName
-    email
     quotes{
       name
-      by
+      by{
+        firstName
+      }
     }
   }
 }

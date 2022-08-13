@@ -1,4 +1,4 @@
-import { ApolloServer, gql } from "apollo-server"
+import { gql } from "apollo-server-express"
 
 export default gql`
 
@@ -31,8 +31,7 @@ type AuthorInfo {
 
 type Quote {
     name: String
-    by: String
-    author: User
+    by: AuthorInfo
 }
 
 

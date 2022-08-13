@@ -1,18 +1,17 @@
 import { useMutation } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { CREATE_QUOTE } from '../../Gql-Operations/mutations';
+import { CREATE_QUOTE } from '../../../Gql-Operations/mutations';
+import { GET_ALL_QUOTES, GET_USER_INFORMATION } from '../../../Gql-Operations/queries';
 
 const CreateQuote = () => {
     // state
-    const [quote, setQuote] = useState(null)
+    const [quote, setQuote] = useState("")
     const [showAlert, setShowAlert] = useState(false)
 
     // signIn mutation
     const [createQuoteMutation, { data, loading, error }] = useMutation(CREATE_QUOTE, {
-        onCompleted(data) {
-
-        }
+        refetchQueries: [GET_ALL_QUOTES, GET_USER_INFORMATION]
     })
 
     console.log(data);
@@ -29,6 +28,7 @@ const CreateQuote = () => {
                 name: quote
             }
         })
+        setQuote("")
     }
 
 
@@ -71,6 +71,7 @@ const CreateQuote = () => {
                                         type="text"
                                         placeholder="write quote.."
                                         className="input input-bordered"
+                                        value={quote}
                                     />
                                 </div>
                                 <div className="form-control mt-6">

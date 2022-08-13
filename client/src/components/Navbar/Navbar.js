@@ -9,10 +9,10 @@ const Navbar = () => {
 
     return (
         <>
-            <div class="navbar bg-base-100">
+            <div class="navbar bg-base-100 px-10">
                 <div class="flex-1">
                     <Link to="/">
-                        <a class="btn btn-ghost normal-case text-xl">daisyUI</a>
+                        <a class="btn btn-ghost normal-case text-xl text-green-500">Quote</a>
                     </Link>
                 </div>
                 <div class="flex-none">
@@ -20,10 +20,13 @@ const Navbar = () => {
                         token ?
                             <>
                                 <Link to="/">
-                                    <p className="mr-3">Home</p>
+                                    <p className="mr-3">Quotes</p>
                                 </Link>
                                 <Link to="/quotes">
-                                    <p className="mr-3">Quotes</p>
+                                    <a class="justify-between mx-4">
+                                        Create Quote
+                                        <span class="ml-1 badge badge-success text-white font-semibold">new</span>
+                                    </a>
                                 </Link>
                             </> :
                             <>
@@ -50,14 +53,6 @@ const Navbar = () => {
                                     <li>
                                         <a class="justify-between">
                                             Profile
-                                        </a>
-                                    </li>
-                                </Link>
-                                <Link to="/create-quote">
-                                    <li>
-                                        <a class="justify-between">
-                                            Create Quote
-                                            <span class="badge badge-success text-white font-semibold">new</span>
                                         </a>
                                     </li>
                                 </Link>

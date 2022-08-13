@@ -19,7 +19,7 @@ export default {
         quotes: async (user) => await Quote.find({ by: user._id })
     },
     Quote: {
-        author: async (q) => await User.findOne({ by: q.by })
+        by: async (q) => await User.findOne({ by: q._id })
     },
     Mutation: {
         // user signup

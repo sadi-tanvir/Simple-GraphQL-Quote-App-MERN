@@ -1,8 +1,9 @@
 import { useQuery } from '@apollo/client';
 import React from 'react';
-import { GET_ALL_QUOTES } from '../../Gql-Operations/queries';
+import { GET_ALL_QUOTES } from '../../../Gql-Operations/queries';
+import CreateQuote from '../createQuote/CreateQuote';
 
-const Quotes = () => {
+const GetAllQuotes = () => {
     const { loading, error, data } = useQuery(GET_ALL_QUOTES)
 
     if (error) {
@@ -40,4 +41,4 @@ const Quotes = () => {
     }
 };
 
-export default Quotes;
+export default GetAllQuotes;
