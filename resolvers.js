@@ -1,5 +1,3 @@
-import { quotes, users } from "./fakedb.js"
-import { randomBytes } from "crypto"
 import User from "./models/User.js"
 import Quote from "./models/Quote.js"
 import bcrypt from "bcryptjs"

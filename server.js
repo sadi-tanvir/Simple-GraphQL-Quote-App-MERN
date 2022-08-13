@@ -13,6 +13,7 @@ import jwt from "jsonwebtoken"
 import express from 'express';
 import http from 'http';
 import cors from "cors"
+import path from "path"
 
 
 if (process.env.NODE_ENV !== 'production') {
@@ -40,7 +41,7 @@ const server = new ApolloServer({
     resolvers,
     context,
     plugins: [
-        process.env.NODE_ENV === 'production' ?
+        process.env.NODE_ENV == 'production' ?
             ApolloServerPluginLandingPageDisabled() :
             ApolloServerPluginLandingPageGraphQLPlayground(),
 
@@ -49,9 +50,14 @@ const server = new ApolloServer({
     ]
 })
 
-app.get('/', (req, res) => {
-    res.json({message: 'Wow!! I did it.'})
-})
+
+// production code
+if(process.env.NODE_ENV == 'production'){
+    app.use(express.static('client/build'))
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+    })
+}
 
 await server.start();
 server.applyMiddleware({ app, path: '/graphql' });
