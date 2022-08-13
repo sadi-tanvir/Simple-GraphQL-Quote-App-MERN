@@ -1,15 +1,20 @@
 import React from 'react';
 import { useQuery } from "@apollo/client"
-import { GET_ALL_QUOTES } from "../../Gql-Operations/queries"
+import { GET_USER_INFO } from "../../Gql-Operations/queries"
 
 const Profile = () => {
+    const token = localStorage.getItem('accessToken')
 
-    const { loading, error, data } = useQuery(GET_ALL_QUOTES)
+    const { loading, error, data } = useQuery(GET_USER_INFO, {
+        headers: {
+            authorization: token
+        }
+    })
 
     if (error) {
         console.log(error);
     } else {
-        console.log(data);
+        console.log('data', data);
     }
 
     if (loading) {

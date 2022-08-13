@@ -26,7 +26,7 @@ const Register = () => {
     const handleSubmit = async (e) => {
         const { firstName, lastName, email, password } = info;
         e.preventDefault()
-        await signupMutation({
+        signupMutation({
             variables: {
                 userData: {
                     firstName,
@@ -40,15 +40,14 @@ const Register = () => {
     return (
         <>
             <div className="hero min-h-screen bg-base-200">
-                <div className="hero-content flex-col lg:flex-row-reverse">
+                <div className="hero-content flex-col w-6/12">
                     <div className="text-center lg:text-left">
                         {error && <p className='text-red-500 text-2xl font-bold'>{error?.message}</p>}
                         {data && <p className='text-green-500 text-2xl font-bold'>{data?.user?.firstName} has signed up!</p>}
 
                         <h1 className="text-5xl font-bold">Register now!</h1>
-                        <p className="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
                     </div>
-                    <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100">
+                    <div className="card flex-shrink-0 w-full shadow-2xl bg-base-100 mt-5">
                         <div className="card-body">
                             <form onSubmit={handleSubmit}>
                                 <div className="form-control">

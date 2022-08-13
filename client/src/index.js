@@ -10,6 +10,9 @@ import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client
 const client = new ApolloClient({
   uri: 'http://localhost:4000/',
   cache: new InMemoryCache(),
+  headers:{
+    authorization: localStorage.getItem('accessToken') || ""
+  }
 });
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

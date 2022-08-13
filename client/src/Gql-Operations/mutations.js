@@ -7,3 +7,24 @@ mutation signUpUser($userData:UserSignUpInput!){
     }
   }
 `
+
+export const SIGNIN_USER = gql`
+mutation signInUser($userData:UserSignInInput!){
+  user:signInUser(userData:$userData){
+   message
+   token
+   user{
+    	_id
+      firstName
+      lastName
+      email
+    }
+  }
+}
+`
+
+export const CREATE_QUOTE = gql`
+mutation createQuote($name:String!){
+  createQuote(name:$name)
+}
+`

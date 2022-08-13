@@ -12,3 +12,19 @@ query getAllQuotes{
     }
   }
 `
+
+
+export const GET_USER_INFO = gql`
+query userInfo{
+  user(_id:""){
+    _id
+    firstName
+    lastName
+    email
+    quotes{
+      name
+      by
+    }
+  }
+}
+`

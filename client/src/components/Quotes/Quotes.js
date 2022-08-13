@@ -21,14 +21,14 @@ const Quotes = () => {
         return (
             <>
                 <div className="container mx-auto mt-5">
-                    <h1 className="text-4xl bg-purple-300 px-5 py-1 text-purple-800 capitalize font-bold mb-10">Quotes</h1>
+                    <h1 className="text-4xl bg-purple-300 rounded-lg px-5 py-2 text-purple-800 capitalize font-bold mb-10">Quotes</h1>
                     {
                         data.quotes.map(quote => {
                             return (
                                 <>
-                                    <blockquote key={quote.by._id} className="flex border-l-4 border-purple-800 pl-3 ml-1 mt-3">
+                                    <blockquote key={quote.by._id} className="bg-purple-100 rounded-lg py-3 pl-3 ml-1 mt-3">
                                         <p className="text-2xl text-slate-600 capitalize font-bold">{quote.name}</p>
-                                        <small className="flex justify-center items-center bg-purple-300 px-3 py-[px] rounded text-purple-800 font-semibold ml-3">{quote.by.firstName}</small>
+                                        <small className="bg-purple-300 px-3 py-[2px] rounded text-purple-800 font-semibold">{quote.by.firstName}</small>
                                     </blockquote>
                                 </>
                             )

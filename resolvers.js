@@ -12,7 +12,7 @@ export default {
             return users
         },
         user: async (parent, args, context) => await User.findOne({ email: context.email }),
-        quotes: async () => await Quote.find({}).populate("by", "_id firstName lastName"),
+        quotes: async () => await Quote.find({}).populate("by", "_id firstName lastName").sort({ createdAt: -1 }),
         quote: async (parent, args) => await Quote.find({ by: args.by })
     },
     User: {

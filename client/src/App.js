@@ -7,6 +7,8 @@ import { routes } from "./routes"
 function App() {
   const element = useRoutes(routes)
 
+
+  // with out appollo client request
   // useEffect(() => {
   //   fetch('http://localhost:4000/', {
   //     method: 'POST',
